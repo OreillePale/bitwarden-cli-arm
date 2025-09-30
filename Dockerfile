@@ -1,14 +1,10 @@
-FROM debian:sid
+# Use a lightweight Node.js + Alpine base
+# let's pray this works
+FROM node:18-alpine
 
-ENV BW_CLI_VERSION=2023.12.1
-
-RUN apt update && \
-    apt install -y wget unzip && \
-    wget https://github.com/bitwarden/clients/releases/download/cli-v${BW_CLI_VERSION}/bw-linux-${BW_CLI_VERSION}.zip && \
-    unzip bw-linux-${BW_CLI_VERSION}.zip && \
-    chmod +x bw && \
-    mv bw /usr/local/bin/bw && \
-    rm -rfv *.zip
+# Install Bitwarden CLI globally
+RUN npm install -g @bitwarden/cli \
+    && rm -rf /root/.npm /tmp/*
 
 COPY entrypoint.sh /
 

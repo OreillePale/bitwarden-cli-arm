@@ -1,9 +1,5 @@
-FROM node:18-alpine
-
-# Install bash and bitwarden CLI
-RUN apk add --no-cache bash \
-    && npm install -g @bitwarden/cli \
-    && rm -rf /root/.npm /tmp/*
+FROM node:20-alpine
+RUN npm install -g @bitwarden/cli
 
 # Copy entrypoint
 COPY entrypoint.sh /entrypoint.sh

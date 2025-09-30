@@ -1,11 +1,13 @@
-# Use a lightweight Node.js + Alpine base
-# let's pray this works
 FROM node:18-alpine
 
-# Install Bitwarden CLI globally
-RUN npm install -g @bitwarden/cli \
+# Install bash and bitwarden CLI
+RUN apk add --no-cache bash \
+    && npm install -g @bitwarden/cli \
     && rm -rf /root/.npm /tmp/*
 
-COPY entrypoint.sh /
+# Copy entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-CMD ["/entrypoint.sh"]
+# Run the script with bash
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]

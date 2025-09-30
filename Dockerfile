@@ -1,5 +1,6 @@
 FROM node:20-alpine
 RUN npm install -g @bitwarden/cli
+RUN apk add bash
 
 # Copy entrypoint
 COPY entrypoint.sh /entrypoint.sh

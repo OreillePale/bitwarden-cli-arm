@@ -32,4 +32,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            oreillepale/bitwarden-cli-arm
+            oreillepale/bitwarden-cli-arm:newest-build
